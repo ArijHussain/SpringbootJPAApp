@@ -4,10 +4,7 @@ import com.sevenre.entity.Trip;
 import com.sevenre.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,6 +39,40 @@ public class TripController {
             tripRepository.save(trip);
         }
         return "Trip created successfully!";
+
+    }
+
+    /**
+     * Update the trip
+     */
+    @RequestMapping( method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String updateTrip(@RequestBody Trip trip){
+
+
+        tripRepository.save(trip);
+        return "Trip updated successfully!";
+
+    }
+
+    /**
+     * Delete the trip
+     */
+    @RequestMapping( method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String deleteTrip(@RequestBody Trip trip){
+
+
+        tripRepository.delete(trip);
+        return "Trip deleted successfully!";
+
+    }
+
+
+    /**
+     * Return the trip with the specific tripId
+     */
+    @RequestMapping( value = "/{id}", method = RequestMethod.GET)
+    public Trip getTripById(@PathVariable long id){
+        return tripRepository.findOne(id);
 
     }
 }

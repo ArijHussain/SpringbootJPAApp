@@ -24,5 +24,8 @@ public class Trip {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd,HH:mm", timezone = "CET")
     private Date endTime;
 
-//TODO: add trace
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinColumn(name = "trace_id")
+    private Trace trace;
+
 }
